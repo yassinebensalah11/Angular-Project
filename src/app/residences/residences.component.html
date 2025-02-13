@@ -1,0 +1,41 @@
+<h2 style="text-align: center; padding: 2%;">Liste des Résidences</h2>
+<div style="text-align: center; margin-bottom: 20px;">
+    <input type="text" [(ngModel)]="searchText" (input)="filterResidences()" placeholder="Rechercher par adresse..." />
+  </div>
+<div class="container">
+  <div class="row">
+    <div *ngFor="let residence of filteredResidences" class="residence-card">
+      <img [src]="residence.image" alt="{{ residence.name }}" class="residence-image" />
+      <h3>{{ residence.name }}</h3>
+
+      <p>
+        <strong>Status:</strong> 
+        <span [ngClass]="getStatusClass(residence.status)">
+          {{ residence.status }}
+        </span>
+      </p>
+
+      <button (click)="showLocation(residence)">Show Location</button>
+&nbsp;
+      <button (click)="toggleFavorite(residence)">
+        <i [ngClass]="isFavorite(residence) ? 'fas fa-heart liked' : 'far fa-heart'"></i> Like
+      </button>
+    </div>
+  </div>
+</div>
+
+<h2 style="text-align: center; padding: 2%;">Favoris ❤️</h2>
+<div class="container">
+  <div class="row">
+    <div *ngFor="let residence of favoriteResidences" class="residence-card">
+      <img [src]="residence.image" alt="{{ residence.name }}" class="residence-image" />
+      <h3>{{ residence.name }}</h3>
+      <p><strong>Adresse:</strong> {{ residence.address }}</p>
+      <p><strong>Status:</strong> {{ residence.status }}</p>
+
+      <button (click)="toggleFavorite(residence)">
+        <i class="fas fa-trash"></i> Retirer
+      </button>
+    </div>
+  </div>
+</div>
