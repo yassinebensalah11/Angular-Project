@@ -20,6 +20,7 @@
       <button (click)="toggleFavorite(residence)">
         <i [ngClass]="isFavorite(residence) ? 'fas fa-heart liked' : 'far fa-heart'"></i> Like
       </button>
+      <button class="btn-btn" routerLink="" >Voir details</button>
     </div>
   </div>
 </div>
@@ -32,6 +33,7 @@
       <h3>{{ residence.name }}</h3>
       <p><strong>Adresse:</strong> {{ residence.address }}</p>
       <p><strong>Status:</strong> {{ residence.status }}</p>
+      
 
       <button (click)="toggleFavorite(residence)">
         <i class="fas fa-trash"></i> Retirer
