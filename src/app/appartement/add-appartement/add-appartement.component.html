@@ -1,0 +1,90 @@
+<div class="container p-4 border rounded bg-light">
+  <h2 class="text-center mb-4">Add New Apartment</h2>
+
+  <form [formGroup]="AddApart" (ngSubmit)="onSubmit()" class="container p-4 border rounded bg-light">
+
+    <div class="row mb-3">
+      <label for="apartNum" class="col-sm-3 col-form-label">Apartment Number:</label>
+      <div class="col-sm-9">
+        <input type="text" id="apartNum" class="form-control" formControlName="apartNum" />
+        <small class="text-danger" *ngIf="AddApart.get('apartNum')?.invalid && AddApart.get('apartNum')?.touched">
+          Apartment number is required and must be a number!
+        </small>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="floorNum" class="col-sm-3 col-form-label">Floor Number:</label>
+      <div class="col-sm-9">
+        <input type="text" id="floorNum" class="form-control" formControlName="floorNum" />
+        <small class="text-danger" *ngIf="AddApart.get('floorNum')?.invalid && AddApart.get('floorNum')?.touched">
+          Floor number is required, must be a number, and at least 2!
+        </small>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="surface" class="col-sm-3 col-form-label">Surface:</label>
+      <div class="col-sm-9">
+        <input type="text" id="surface" class="form-control" formControlName="surface" />
+        <small class="text-danger" *ngIf="AddApart.get('surface')?.invalid && AddApart.get('surface')?.touched">
+          Surface is required!
+        </small>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label">Terrace:</label>
+      <div class="col-sm-9">
+        <div class="form-check">
+          <input type="radio" id="terraceYes" value="yes" formControlName="terrace" class="form-check-input" (change)="onTerraceChange()" />
+          <label for="terraceYes" class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" id="terraceNo" value="no" formControlName="terrace" class="form-check-input" (change)="onTerraceChange()" />
+          <label for="terraceNo" class="form-check-label">No</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="surfaceTerrace" class="col-sm-3 col-form-label">Surface Terrace:</label>
+      <div class="col-sm-9">
+        <input type="text" id="surfaceTerrace" class="form-control" formControlName="surfaceterrace" />
+        <small class="text-danger" *ngIf="AddApart.get('surfaceterrace')?.invalid && AddApart.get('surfaceterrace')?.touched">
+          Surface terrace is required if terrace is Yes!
+        </small>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label">Category:</label>
+      <div class="col-sm-9">
+        <div class="form-check">
+          <input type="radio" id="categoryS1" value="S+1" formControlName="category" class="form-check-input" />
+          <label for="categoryS1" class="form-check-label">S+1</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" id="categoryS2" value="S+2" formControlName="category" class="form-check-input" />
+          <label for="categoryS2" class="form-check-label">S+2</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" id="categoryS3" value="S+3" formControlName="category" class="form-check-input" />
+          <label for="categoryS3" class="form-check-label">S+3</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="residence" class="form-label">Residence:</label>
+      <input type="text" id="floorNum" class="form-control" formControlName="ResidenceId" />
+    </div>
+
+    <div class="row">
+      <div class="col text-center">
+        <button type="submit" class="btn btn-primary me-2" [disabled]="AddApart.invalid">Add</button>
+        <button type="button" class="btn btn-secondary" (click)="resetForm()">Reset</button>
+      </div>
+    </div>
+  </form>
+</div>
