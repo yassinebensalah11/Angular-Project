@@ -1,3 +1,4 @@
+import { ResidenceService } from './../../core/models/services/residence.service';
 import { Component } from '@angular/core';
 import { Residence } from 'src/core/models/Residence';
 
@@ -8,16 +9,20 @@ import { Residence } from 'src/core/models/Residence';
 })
 export class ResidencesComponent {
   listResidences: Residence[] = [
-    { id: 1, name: "El fel", address: "Borj Cedria", image: "../../assets/img/1.jpg", status: "Disponible" },
-    { id: 2, name: "El yasmine", address: "Ezzahra", image: "../../assets/img/2.jpg", status: "Disponible" },
-    { id: 3, name: "El Arij", address: "Rades", image: "../../assets/img/3.jpg", status: "Vendu" },
-    { id: 4, name: "El Anber", address: "inconnu", image: "../../assets/img/4.jpg", status: "En Construction" }
   ];
+  constructor(private residenceService: ResidenceService) {}
+
+  ngOnInit() {
+    this.residenceService.getresidences().subscribe(data => {
+      this.listResidences = data;
+      this.filteredResidences = [...this.listResidences];
+    });
+  }
 
   favoriteResidences: Residence[] = [];
   searchText: string = "";
   filteredResidences: Residence[] = [...this.listResidences];
-  
+
   showLocation(residence: Residence): void {
     if (residence.address.toLowerCase() === "inconnu") {
       alert(`L'adresse de la résidence "${residence.name}" est inconnue.`);
@@ -57,5 +62,21 @@ export class ResidencesComponent {
     this.filteredResidences = this.listResidences.filter(residence =>
       residence.address.toLowerCase().includes(lowerSearch)
     );
+  }
+
+
+  deleteResidence(id: number): void {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cette résidence ?')) {
+      this.residenceService.deleteResidence(id).subscribe(
+        () => {
+          this.listResidences = this.listResidences.filter(residence => residence.id !== id);
+          alert('Résidence supprimée avec succès');
+          location.reload();
+        },
+        (error) => {
+          console.error('Erreur lors de la suppression de la résidence', error);
+        }
+      );
+    }
   }
 }

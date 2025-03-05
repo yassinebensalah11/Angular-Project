@@ -11,18 +11,19 @@ import { ResidencesComponent } from './residences/residences.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ResidenceDetailsComponent } from './residences/residence-details/residence-details.component';
 import { AddAppartementComponent } from './appartement/add-appartement/add-appartement.component';
+import { AddResidenceComponent } from './residences/add-residence/add-residence.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ResidencesComponent,
-
     HomeComponent,
     HeaderComponent,
     FooterComponent,
     NotFoundComponent,
     ResidenceDetailsComponent,
-    AddAppartementComponent
+    AddAppartementComponent,
+    AddResidenceComponent
   ],
   imports: [
     BrowserModule,

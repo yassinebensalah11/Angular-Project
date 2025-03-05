@@ -1,3 +1,4 @@
+<a routerLink="/addRes">Add Residence</a>
 <h2 style="text-align: center; padding: 2%;">Liste des Résidences</h2>
 <div style="text-align: center; margin-bottom: 20px;">
     <input type="text" [(ngModel)]="searchText" (input)="filterResidences()" placeholder="Rechercher par adresse..." />
@@ -9,18 +10,21 @@
       <h3>{{ residence.name }}</h3>
 
       <p>
-        <strong>Status:</strong> 
+        <strong>Status:</strong>
         <span [ngClass]="getStatusClass(residence.status)">
           {{ residence.status }}
         </span>
       </p>
-      <!-- el / eli 9bal details bsh necrasiw el path lekdim /residence o directe nhotou /details/id--> 
-      <button class="btn-btn" [routerLink]="['/details',residence.id]">Voir Details</button>&nbsp; 
+      <!-- el / eli 9bal details nzidou bsh necrasiw el path lekdim /residence w directe nhotou /details/id-->
+       <!-- ken mosh parametré : [routerLink]="details" -->
+      <button class="btn-btn" [routerLink]="['/details',residence.id]">Voir Details</button>&nbsp;
       <button (click)="showLocation(residence)">Show Location</button>
 &nbsp;
       <button (click)="toggleFavorite(residence)">
         <i [ngClass]="isFavorite(residence) ? 'fas fa-heart liked' : 'far fa-heart'"></i> Like
       </button>
+      &nbsp;
+      <button (click)="deleteResidence(residence.id)">Delete</button>
     </div>
   </div>
 </div>
